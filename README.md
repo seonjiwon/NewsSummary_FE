@@ -4,6 +4,10 @@
 
 > 이 프로젝트는 [Cursor](https://cursor.sh) IDE와 Claude AI를 활용하여 개발되었습니다.
 
+## 배포 URL
+
+- [https://news-summary-fe.vercel.app](https://news-summary-fe.vercel.app)
+
 ## 주요 기능
 
 1. **사용자 인증**
