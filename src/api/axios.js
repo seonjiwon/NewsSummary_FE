@@ -12,13 +12,19 @@ const BASE_URL =
 console.log("현재 환경:", import.meta.env.MODE);
 console.log("API 기본 URL:", BASE_URL);
 
+// 일반적인 요청에 대한 타임아웃 (20초)
+const DEFAULT_TIMEOUT = 20000;
+
+// 무거운 작업(요약 생성 등)에 대한 타임아웃 (60초)
+const LONG_TIMEOUT = 60000;
+
 const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
-  // 타임아웃 설정
-  timeout: 10000,
+  // 기본 타임아웃 설정 (20초로 증가)
+  timeout: DEFAULT_TIMEOUT,
   // withCredentials 설정 변경
   withCredentials: false,
 });
@@ -27,6 +33,17 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     console.log("API 요청:", config.method.toUpperCase(), config.url);
+
+    // 뉴스 요약과 같은 무거운 작업은 타임아웃 시간 증가
+    if (
+      config.url?.includes("/news-summary") ||
+      config.url?.includes("/admin/news/summarize")
+    ) {
+      console.log(`타임아웃 설정: ${LONG_TIMEOUT}ms (긴 작업용)`);
+      config.timeout = LONG_TIMEOUT;
+    } else {
+      console.log(`타임아웃 설정: ${config.timeout}ms`);
+    }
 
     // localStorage에서 토큰 가져오기
     const token = localStorage.getItem("token");
