@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
-import axios from "axios";
+import api from "../api/axios"; // axios 기본 인스턴스 import로 변경
 
 export default function Hello() {
   const [message, setMessage] = useState("");
@@ -11,10 +11,10 @@ export default function Hello() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("API 요청: /api/hello (프록시 사용)");
+        console.log("API 요청: /hello");
 
-        // 프록시를 통한 요청
-        const response = await axios.get("/api/hello", {
+        // 기본 api 인스턴스 사용 (BASE_URL이 설정된)
+        const response = await api.get("/hello", {
           headers: {
             Accept: "application/json",
           },
@@ -47,7 +47,14 @@ export default function Hello() {
   }, []);
 
   const tryDirectAccess = () => {
-    const url = "http://localhost:8080/hello";
+    // 환경에 따라 다른 URL 사용
+    const apiUrl =
+      import.meta.env.VITE_API_URL ||
+      (import.meta.env.MODE === "development"
+        ? "http://localhost:8080"
+        : "https://newssummarybe-production.up.railway.app");
+
+    const url = `${apiUrl}/hello`;
     window.open(url, "_blank");
   };
 
