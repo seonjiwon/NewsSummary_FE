@@ -91,4 +91,16 @@ export const userApi = {
   getNewsSummary: (userId) => api.get(`/users/${userId}/news-summary`),
 };
 
+// 관리자용 뉴스 API
+export const newsApi = {
+  // 뉴스 수집
+  fetchNews: (topic) => api.post("/admin/news/fetch", { topic }),
+
+  // 뉴스 요약 생성
+  summarizeNews: () => api.post("/admin/news/summarize"),
+
+  // 뉴스 발송
+  sendNews: (method = "email") => api.post("/admin/news/send", { method }),
+};
+
 export default api;
