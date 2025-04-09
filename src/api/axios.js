@@ -1,7 +1,15 @@
 import axios from "axios";
 
-// API 기본 URL을 명시적으로 지정
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+// 환경에 따른 API 기본 URL 설정
+const DEV_URL = "http://localhost:8080"; // 개발 환경
+const PROD_URL = "https://newssummarybe-production.up.railway.app"; // 프로덕션 환경
+
+// 환경 변수에서 API URL을 가져오거나, 현재 환경에 따라 기본값 사용
+const BASE_URL =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.MODE === "development" ? DEV_URL : PROD_URL);
+
+console.log("현재 환경:", import.meta.env.MODE);
 console.log("API 기본 URL:", BASE_URL);
 
 const api = axios.create({
