@@ -34,6 +34,7 @@ build
 *.njsproj
 *.sln
 *.sw?
+.cursor/*
 
 # Environment variables
 .env
