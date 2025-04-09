@@ -12,6 +12,7 @@ import KeywordEdit from "./pages/KeywordEdit";
 import NewsList from "./pages/NewsList";
 import Admin from "./pages/Admin";
 import Hello from "./pages/Hello";
+import Home from "./pages/Home";
 
 export default function App() {
   return (
@@ -45,7 +46,7 @@ export default function App() {
               </PrivateRoute>
             }
           />
-          <Route path="/" element={<Navigate to="/news" replace />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </Layout>
     </Router>
