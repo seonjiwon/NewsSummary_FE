@@ -1,0 +1,62 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+When editing files in `src/components/atoms/**`:
+- Write highly reusable, stateless, UI-only components.
+- Do not include business logic or state handling.
+- Keep the file minimal (max 100 lines per atom).
+- Use TailwindCSS utility classes for styling.
+- Use TypeScript for props with clear interface definitions.
+
+When editing files in `src/components/molecules/**`:
+- Combine 2 or more atoms into meaningful UI blocks.
+- Keep logic minimal and push complex state to parent or hooks.
+- Props should be clearly defined and documented.
+- Ensure proper visual and accessibility roles (like `aria-*`).
+
+When editing files in `src/components/organisms/**`:
+- Combine molecules into complex but modular UI structures (e.g., Header, Footer).
+- Handle medium-level UI logic (toggle, tab state, layout sync).
+- Keep layout flexibility and avoid hardcoded values.
+
+When editing files in `src/pages/**`:
+- Keep files focused on layout and route-level state.
+- Use hooks and services for logic — do not call APIs directly here.
+- Compose organisms and pass data down as props.
+- Ensure proper loading and error state handling.
+
+When editing files in `src/layouts/**`:
+- Define reusable layout scaffolding (e.g., MainLayout, DashboardLayout).
+- Use <Outlet /> or children for composition.
+- Avoid app-specific logic inside layouts.
+
+When editing files in `src/hooks/**`:
+- Each file should export a single, well-named custom hook (e.g., `useUser`, `useModalState`).
+- Use hooks to isolate reusable logic from UI.
+- Do not include JSX or DOM references here.
+
+When editing files in `src/services/**`:
+- Isolate all HTTP logic using fetch or axios.
+- Group API calls by domain (e.g., `authService.ts`, `postService.ts`).
+- Return parsed data and avoid side effects.
+- Use error boundary patterns or error wrappers if needed.
+
+When editing files in `src/types/**`:
+- Define shared interfaces and types here.
+- Use PascalCase for type/interface names.
+- Avoid including implementation logic.
+
+When editing files in `src/utils/**`:
+- Define pure utility functions only.
+- Functions must not access or mutate app state.
+- Write tests if the logic is non-trivial.
+
+When editing files in `src/constants/**`:
+- Store static values like routes, messages, enums.
+- Keep naming consistent and uppercase snake case for constants (e.g., `USER_ROLES`).
+
+When editing files in `src/styles/**`:
+- Define global Tailwind config, theming, or custom utility classes.
+- Avoid including component-scoped styles here.
